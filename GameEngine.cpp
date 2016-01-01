@@ -43,7 +43,7 @@ void GameEngine::buildCity(City *city) {
 void GameEngine::workWithEquip() {
     this->hero->printEquipped();
     char answer = 'a';
-    while (answer != 'y' or answer != 'n') {
+    while (answer != 'y' and answer != 'n') {
         cout << "Would like to unequip any item? (y/n): ";
         cin >> answer;
     }
@@ -58,7 +58,7 @@ void GameEngine::workWithEquip() {
 void GameEngine::workWithInventory() {
     this->hero->inventory->printInventory();
     char answer = 'a';
-    while (answer != 'y' or answer != 'n') {
+    while (answer != 'y' and answer != 'n') {
         cout << "Would you like to equipp any item? (y/n): ";
         cin >> answer;
     }
@@ -69,7 +69,7 @@ void GameEngine::workWithInventory() {
         this->hero->setEquipped(this->hero->inventory->getItem(item_name));
     }
     answer = 'a';
-    while (answer != 'y' or answer != 'n') {
+    while (answer != 'y' and answer != 'n') {
         cout << "Would you like to remove any item? (y/n): ";
         cin >> answer;
     }

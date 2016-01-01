@@ -40,8 +40,8 @@ Hero::Hero() {
         cout << " and speed " << speed << endl;
         cout << "You have " << remaining_power << " remaning points" << endl;
         char answer = 'a';
-        while (answer != 'y' or answer != 'n') {
-            cout << "Would like to keep this setting? (y/n)";
+        while (answer != 'y' and answer != 'n') {
+            cout << "Would like to keep this setting? (y/n): ";
             cin >> answer;
         }
         if (answer == 'y') break;
@@ -105,7 +105,7 @@ void Hero::setEquipped(Item* item) {
                         cout << "2) ";
                         this->equipped[j]->printInfo();
                         char answer = 'a';
-                        while (answer != '1' or answer != '2' or
+                        while (answer != '1' and answer != '2' and
                                answer != 'n') {
                             cout << "Your choice is (1/2/n): ";
                             cin >> answer;
@@ -125,7 +125,7 @@ void Hero::setEquipped(Item* item) {
             cout << "Details of item being used: " << endl;
             this->equipped[i]->printInfo();
             char answer = 'a';
-            while (answer != 'y' or answer != 'n') {
+            while (answer != 'y' and answer != 'n') {
                 cout << "Your choice is (y/n): ";
                 cin >> answer;
             }
