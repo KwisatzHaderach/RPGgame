@@ -10,7 +10,6 @@
 class FinishingPlace : public Place {
 public:
     FinishingPlace(Place* wayBack, std::string being_name);
-    std::vector<Place*> getWayForth();
     std::string getType();
 };
 #endif

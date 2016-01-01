@@ -26,3 +26,7 @@
 *.exe
 *.out
 *.app
+
+ZOO-game
+ZOO-game.vpp?*
+.idea*

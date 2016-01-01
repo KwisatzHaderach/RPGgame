@@ -22,3 +22,6 @@ tar:
 
 zip:
 	zip $(LOGIN).zip $(TOPACK)
+
+exe32:
+	

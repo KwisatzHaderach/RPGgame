@@ -22,10 +22,6 @@ DeadEnd::DeadEnd(Place* wayBack) {
                                 + " lying on the ground");
 }
 
-vector<Place*> DeadEnd::getWayForth() {
-    return {};
-}
-
 string DeadEnd::getType() {
     return "deadend";
 }

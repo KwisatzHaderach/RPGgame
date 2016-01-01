@@ -27,8 +27,8 @@ public:
 
     Place(Place* wayBack);
     Place();
-    virtual Place* getWayBack();
-    virtual std::vector<Place*> getWayForth();
+    Place* getWayBack();
+    std::vector<Place*> getWayForth();
     void addWayForth(Place* place);
     Item* getItem();
     void removeItem();

@@ -12,7 +12,6 @@ public:
     static std::vector<std::vector<std::string>> choose_answers;
 
     BeginningPlace();
-    Place* getWayBack();
     std::string getType();
 };
 #endif

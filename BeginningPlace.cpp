@@ -25,10 +25,6 @@ BeginningPlace::BeginningPlace():Place() {
                                 + " lying on the ground");
 }
 
-Place* BeginningPlace::getWayBack() {
-    return NULL;
-}
-
 string BeginningPlace::getType() {
     return "beginning";
 }

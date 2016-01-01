@@ -14,10 +14,6 @@ FinishingPlace::FinishingPlace(Place* wayBack, string being_name):Place() {
     this->answers.push_back("Interact with " + this->being->getName());
 }
 
-vector<Place*> FinishingPlace::getWayForth() {
-    return {};
-}
-
 string FinishingPlace::getType() {
     return "finish";
 }
