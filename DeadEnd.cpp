@@ -26,7 +26,7 @@ string DeadEnd::getType() {
     return "deadend";
 }
 
-std::vector<std::string> DeadEnd::choose_text = {
+vector<string> DeadEnd::choose_text = {
         "There is a room with only one way in and out.",
         "The road just ends with no way further.",
         "There is a huge hole in the ground, you can't get across."};

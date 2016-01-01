@@ -94,7 +94,7 @@ Place::~Place() {
         delete this->wayForth[i];
 }
 
-std::vector<std::vector<std::string>> Place::choose_text = {
+vector<vector<string>> Place::choose_text = {
         {"There is a shrine by the road.",
          "You can see a hut nearby, with smoking camp fire.",
          "You are coming to place with animal pelts "
@@ -118,7 +118,7 @@ std::vector<std::vector<std::string>> Place::choose_text = {
                  " by the side.",
          "You walk by Ministry of Silly Walks"} //10000
 };
-std::vector<std::vector<std::string>> Place::choose_answers = {
+vector<vector<string>> Place::choose_answers = {
         {"You can go straight ahead",
          "Choose the way to your left",
          "Or the small path to your right"}, //-20000

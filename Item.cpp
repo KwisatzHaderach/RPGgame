@@ -96,7 +96,7 @@ void Item::printInfo() {
     cout << this->getSpecial() << "/" << this->getType() << endl;
 }
 
-std::map<std::string, std::vector<std::string>> Item::namedItemStatsStack =
+map<string, vector<string>> Item::namedItemStatsStack =
         {{"Ring of Rassilon", {"20", "0", "5", "immortality", "stone", "hand"}},
          {"The Key To Time", {"0", "10", "20", "repair capsule", "win the game",
                                      "neck"}},
@@ -121,7 +121,7 @@ std::map<std::string, std::vector<std::string>> Item::namedItemStatsStack =
          {"Diamond necklace", {"4", "9", "4", "shiny", "metal ass", "neck"}}
         }; // name, {strength, charisma, speed, special, special hidden, type}
 
-std::vector<std::vector<std::string>> Item::yearItemNamesStack =
+vector<vector<string>> Item::yearItemNamesStack =
         {{"Stone knife", "Big wood", "Lizard", "Flint stone", "Mammoth bone"},
          {"Scepter", "Rusty sword", "Small knife", "Flask", "Ring",
                  "Leather bracelet"},

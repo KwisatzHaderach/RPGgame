@@ -29,11 +29,11 @@ string BeginningPlace::getType() {
     return "beginning";
 }
 
-std::vector<std::string> BeginningPlace::choose_text = {
+vector<string> BeginningPlace::choose_text = {
         "You find yourself at the entrance to the city.",
         "You see a small village spreading ahead of you.",
         "You see a large tunel entrance ahead of you."};
-std::vector<std::vector<std::string>> BeginningPlace::choose_answers = {
+vector<vector<string>> BeginningPlace::choose_answers = {
         {"You can go through main street straight ahead",
          "Choose a small side street"},
         {"Go towards village center",

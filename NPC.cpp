@@ -57,7 +57,7 @@ NPC::~NPC() {
     delete this->weakness;
 }
 
-std::map<std::string, std::vector<std::string>> NPC::npcStatsStack =
+map<string, vector<string>> NPC::npcStatsStack =
         {{"Rassilon", {"100", "Ring of Rassilon", "The Key To Time",
                               "23", "8", "42"}},
          {"Pet Show owner", {"4", "Dead parrot", "Albatros", "8", "2", "4"}},

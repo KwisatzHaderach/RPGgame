@@ -409,7 +409,7 @@ Hero::~Hero() {
     delete this->inventory;
 }
 
-std::vector<std::string> Hero::questions =
+vector<string> Hero::questions =
         {"What are doing in here?", "What do you want from me?",
          "Who dares to bother me?", "Look who's there.",
          "What a weird creature!", "Who are you, mortal?",
@@ -433,7 +433,7 @@ std::vector<std::string> Hero::questions =
          "What is your favorite color.", "What is the air speed velocity of "
                  "an unladen swallow?"}; // 32
 
-std::vector<std::pair<std::string, int>> Hero::answers =
+vector<pair<string, int>> Hero::answers =
         {{"Oook!", -4}, {"My brain hurts too!", -2}, {"Hello sweetie.", 3},
          {"Nobody expects the spanish inquisition!", 5},
          {"Yes it is a very nice day", -9}, {"Can point me to the end?", 3},
