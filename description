@@ -1,0 +1,33 @@
+The goal of this game is to defeat the main villain. To achieve that goal,
+the hero can travel through various cities, in each city are some
+valuable items and interesting people, which can help you or fight you,
+depending on their hostility. To help you, there is also a capsule,
+in which you can travel through time. When you do,
+items and people in all places change accordingly to that era.
+
+The player must allocate some skill points at the start of the game.
+Points can go to 3 attributes: strength, speed, charisma.
+This will help him in his venture. Also it will help to set hostility,
+which determines, whether NPCs will attack him, or talk to him.
+NPCs also have these attributes and every NPC has some item of value to player
+and also some weakness.
+
+Hero also has an inventory which is limited by his strength attribute.
+And he has limited number of items that can be also equipped, this grants
+some bonuses to players attributes and some special ability, mostly bonus
+against someone. Items also has hidden special ability that can help hero
+to even win the game without a fight.
+
+Player traverses through cities, in every city there are places,
+these can lead to any number (mostly one or two) other places. In every place
+can be an item or a person. Player may choose (or may be forced) to interact
+with the person in that place. Dialog will have multiple option answers and
+can lead to multiple endings of the dialog. Fight also provides multiple
+options for the player like flee, defend himself, attack enemy and others.
+If hero dies, he is reset to capsule and his items are removed,
+but he can continue and finish the game, although the environment won't change.
+If enemy dies, he will drop some amount of money and also some item.
+There can also be items in places just waiting to be taken.
+Also there will be places, that require having some exact item for entering.
+But this will not prevent player from going through the entire city, just
+prevents him from entering and possibly acquiring something really valuable.
