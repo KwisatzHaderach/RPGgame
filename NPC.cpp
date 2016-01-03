@@ -19,7 +19,7 @@ string NPC::getRandomName() {
 NPC::NPC() {
     srand(time(NULL));
     this->setName(this->getRandomName());
-    this->hostility = rand() % 20 + 10;
+    this->hostility = rand() % 15 + 5;
     this->setCharisma(rand() % 5);
     this->setSpeed(rand() % 10 + 10);
     this->setStrength(rand() % 20 + 10);
@@ -27,13 +27,17 @@ NPC::NPC() {
 
 NPC::NPC(string name) {
     this->setName(name);
-    this->hostility = stoi(npcStatsStack[name][0]);
-    this->specialItem = new Item(npcStatsStack[name][1]);
-    if (npcStatsStack[name][2] != "")
-        this->weakness = new Item(npcStatsStack[name][2]);
-    this->setCharisma(stoi(npcStatsStack[name][3]));
-    this->setSpeed(stoi(npcStatsStack[name][4]));
-    this->setStrength(stoi(npcStatsStack[name][5]));
+    map<string,vector<string>>::iterator it = this->npcStatsStack.begin();
+    for(; it != this->npcStatsStack.end(); ++it)
+        if (it->first == name) break;
+    if (it == this->npcStatsStack.end()) return;
+    this->hostility = stoi(it->second[0]);
+    this->specialItem = new Item(it->second[1]);
+    if (it->second[2] != "")
+        this->weakness = new Item(it->second[2]);
+    this->setCharisma(stoi(it->second[3]));
+    this->setSpeed(stoi(it->second[4]));
+    this->setStrength(stoi(it->second[5]));
 }
 
 int NPC::getHostility() {

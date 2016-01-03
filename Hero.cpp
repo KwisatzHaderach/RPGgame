@@ -173,7 +173,8 @@ int Hero::getAction() {
 bool Hero::fightWithNPC(NPC* being) {
     cout << "You are entering the duel." << endl;
     int npc_life = 100, hero_life = 100;
-    if (this->inventory->isItemInInventory(being->getWeakness()->getName())) {
+    if (being->getWeakness() and
+            this->inventory->isItemInInventory(being->getWeakness()->getName())) {
         cout << "You have an item that NPC has weakness to." << endl;
         npc_life = 0;
     }

@@ -14,8 +14,6 @@ BeginningPlace::BeginningPlace():Place() {
         this->item = new Item(GameVariables::year);
     else this->item = NULL;
     this->text = this->choose_text[choice];
-    for (unsigned int i = 0; i < this->choose_answers[choice].size(); ++i)
-        this->answers.push_back(this->choose_answers[choice][i]);
     this->answers.push_back("Go to some other city");
     if (this->being)
         this->answers.push_back("There is " + this->being->getName()
@@ -23,6 +21,8 @@ BeginningPlace::BeginningPlace():Place() {
     if (this->item)
         this->answers.push_back("You can see " + this->item->getName()
                                 + " lying on the ground");
+    for (unsigned int i = 0; i < this->choose_answers[choice].size(); ++i)
+        this->answers.push_back(this->choose_answers[choice][i]);
 }
 
 string BeginningPlace::getType() {

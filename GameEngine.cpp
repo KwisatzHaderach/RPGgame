@@ -2,20 +2,20 @@
 
 using namespace std;
 
-void GameEngine::buildPlace(Place *place, int *difficulty, int *length) {
+void GameEngine::buildPlace(Place *place, int difficulty, int length) {
     srand(time(NULL));
-    if (*length > GameVariables::gameDifficulty) {
+    if (length >= GameVariables::gameDifficulty) {
         place->addWayForth(new FinishingPlace(
-                place, this->npcNameStack[rand()%(npcNameStack.size()-1)+1]));
+                place, this->npcNameStack[rand()%npcNameStack.size()]));
         return;
     }
     int max = rand() % 3 + 1;
-    *difficulty += max - 1;
-    *length += 1;
+    difficulty += max - 1;
+    length += 1;
     for (unsigned int i = 0; i < max; ++i)
-        if (rand() % 4 == 0 and *difficulty > 1) {
+        if (rand() % 4 == 0 and difficulty > 1) {
             place->addWayForth(new DeadEnd(place));
-            *difficulty -= 1;
+            difficulty -= 1;
         }
         else {
             Place* new_place = new Place(place);
@@ -28,14 +28,14 @@ void GameEngine::buildPlace(Place *place, int *difficulty, int *length) {
 void GameEngine::buildCity(City *city) {
     if (city->getStartingPlace()) return;
     srand(time(NULL));
-    int *difficulty, *length;
+    int difficulty, length;
     BeginningPlace *start = new BeginningPlace();
     city->setStartingPlace(start);
     Place *start_place1 = new Place(start), *start_place2 = new Place(start);
     start->addWayForth(start_place1);
     start->addWayForth(start_place2);
-    *difficulty = 2;
-    *length = 1;
+    difficulty = 2;
+    length = 1;
     this->buildPlace(start_place1, difficulty, length);
     this->buildPlace(start_place2, difficulty, length);
 }
@@ -95,10 +95,10 @@ bool GameEngine::walkThroughCity(Place *place) {
         }
         place->printTextWithAnswers();
         int answers_size = place->getAnswersSize();
-        cout << answers_size << ") Look into your inventory." << endl;
-        cout << answers_size + 1 << ") Look at your equipped items." << endl;
+        cout << answers_size+1 << ") Look into your inventory." << endl;
+        cout << answers_size+2 << ") Look at your equipped items." << endl << endl;
         int choice = 0;
-        while (choice < 1 or choice > answers_size + 1) {
+        while (choice < 1 or choice > answers_size + 2) {
             cout << "What action would you like to perform? (1-" <<
             answers_size + 1 << "): ";
             cin >> choice;
@@ -121,10 +121,10 @@ bool GameEngine::walkThroughCity(Place *place) {
                             [choice - answers_size +
                             place->getWayForth().size() - 1]);
         }
-        else if (choice == answers_size) {
+        else if (choice == answers_size + 1) {
             this->workWithInventory();
         }
-        else if (choice == answers_size + 1) {
+        else if (choice == answers_size + 2) {
             this->workWithEquip();
         }
     }
@@ -145,6 +145,7 @@ GameEngine::GameEngine() {
     this->finale = Finale::getInstance();
     for(map<string,vector<string>>::iterator it = Item::namedItemStatsStack.begin();
             it != Item::namedItemStatsStack.end(); ++it) {
+        if (it->first == "Ring of Rassilon") continue;
         this->npcNameStack.push_back(it->first);
     }
 }
@@ -166,7 +167,7 @@ void GameEngine::gameIsOn() {
         int choice = -1;
         while (choice < 0 or (choice > num_cities+3 and cities_unfinished > 0)
                 or (choice > num_cities+4 and cities_unfinished <= 0)) {
-            cout << "Your choice is(0-";
+            cout << "Your choice is? (0-";
             if (cities_unfinished > 0)
                 cout << num_cities+3 << "): ";
             else cout << num_cities+4 << "): ";

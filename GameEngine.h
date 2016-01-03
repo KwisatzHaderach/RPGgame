@@ -25,7 +25,7 @@ private:
              "San Helios", "Christmas", "Arcadia", "Darillium"};
     std::vector<std::string> npcNameStack;
     void buildCity(City* city);
-    void buildPlace(Place* place, int *difficulty, int *length);
+    void buildPlace(Place* place, int difficulty, int length);
     void workWithEquip();
     void workWithInventory();
     bool walkThroughCity(Place* place);

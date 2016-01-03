@@ -47,7 +47,6 @@ Item* Place::getItem() {
 }
 
 void Place::removeItem() {
-    delete this->item;
     this->item = NULL;
     if (this->being)
         this->answers.erase(this->answers.begin()+2);

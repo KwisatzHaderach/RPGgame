@@ -5,7 +5,7 @@ Capsule* Capsule::instance;
 
 Capsule::Capsule():City("TARDIS") {
     this->working = true;
-    this->setYear(2015);
+    GameVariables::year = 2015;
 }
 
 Capsule* Capsule::getInstance() {
@@ -28,7 +28,7 @@ int Capsule::getYear() {
 
 void Capsule::setYear(int year) {
     if (!this->working) {
-        cout << "Your RARDIS isn't working" << endl;
+        cout << "Your TARDIS isn't working" << endl;
         return;
     }
     GameVariables::year = year;
