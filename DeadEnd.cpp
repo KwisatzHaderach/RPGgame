@@ -3,7 +3,6 @@
 using namespace std;
 
 DeadEnd::DeadEnd(Place* wayBack) {
-    srand(time(NULL));
     this->wayBack = wayBack;
     this->wayForth = {};
     if (rand() % 4 > 0)

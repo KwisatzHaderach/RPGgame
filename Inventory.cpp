@@ -37,6 +37,7 @@ Item* Inventory::getItem(std::string item_name) {
 
 void Inventory::addItem(Item* item) {
     this->items.push_back(item);
+    this->itemCount += 1;
 }
 
 void Inventory::removeItem(Item* item) {
@@ -45,6 +46,7 @@ void Inventory::removeItem(Item* item) {
         if (*i == item) {
             delete *i;
             this->items.erase(i);
+            this->itemCount -= 1;
         }
 }
 
@@ -53,6 +55,7 @@ void Inventory::removeItem(string name) {
         if (this->items[i]->getName() == name) {
             delete this->items[i];
             this->items.erase(this->items.begin() + i);
+            this->itemCount -= 1;
         }
 }
 

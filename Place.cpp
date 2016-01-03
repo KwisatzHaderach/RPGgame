@@ -10,7 +10,6 @@ int Place::getClosestYear(int year) {
 }
 
 Place::Place(Place* wayBack) {
-    srand(time(NULL));
     this->wayBack = wayBack;
     this->wayForth = {};
     if (rand() % 2)
@@ -74,9 +73,8 @@ int Place::getAnswersSize() {
 }
 
 void Place::setText() {
-    srand(time(NULL));
     int index = this->getClosestYear(GameVariables::year);
-    int choice = rand() % (int)this->choose_text[index].size();
+    int choice = rand() % this->choose_text[index].size();
     this->text = this->choose_text[index][choice];
     for (int i = 0; i < this->wayForth.size(); ++i)
         this->answers.push_back(this->choose_answers[index][i]);
@@ -113,10 +111,11 @@ vector<vector<string>> Place::choose_text = {
         {"You see an unused space port close by.",
          "You see a holoprojector running in a nearby pub.",
          "There is a computer terminal, but it's offline.",
-         "There is a road with many floating cars parked"
-                 " by the side.",
-         "You walk by Ministry of Silly Walks"} //10000
+         "There is a road with many floating cars parked "
+                 "by the side.",
+         "You walk by the Ministry of Silly Walks"} //10000
 };
+
 vector<vector<string>> Place::choose_answers = {
         {"You can go straight ahead",
          "Choose the way to your left",

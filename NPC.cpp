@@ -3,21 +3,19 @@
 using namespace std;
 
 string NPC::getRandomName() {
-    srand(time(NULL));
     int number = rand() % 5;
     switch(number)
     {
         case 0: return "Dog";
         case 1: return "Drunk";
         case 2: return "Troll";
-        case 3: return "Huge cat";
-        case 4: return "Giant worm";
+        case 3: return "HugeCat";
+        case 4: return "GiantWorm";
     }
     return "Johny";
 }
 
 NPC::NPC() {
-    srand(time(NULL));
     this->setName(this->getRandomName());
     this->hostility = rand() % 15 + 5;
     this->setCharisma(rand() % 5);
@@ -62,22 +60,20 @@ NPC::~NPC() {
 }
 
 map<string, vector<string>> NPC::npcStatsStack =
-        {{"Rassilon", {"100", "Ring of Rassilon", "The Key To Time",
-                              "23", "8", "42"}},
-         {"Pet Show owner", {"4", "Dead parrot", "Albatros", "8", "2", "4"}},
-         {"King Arthur", {"8", "Excalibur", "", "9", "8", "14"}},
-         {"Bond, James Bond", {"14", "PDA", "Spy glass", "15", "9", "11"}},
-         {"Robinson Crusoe", {"2", "Spy glass", "Dead parrot", "2", "4", "6"}},
-         {"R2D2", {"6", "Mire chip", "Bowler hat", "12", "4", "6"}},
-         {"Dalek", {"20", "The Key To Time", "Fez", "2", "5", "13"}},
-         {"Queen Elizabeth", {"10", "Diamond necklace", "Fang necklace", "14",
-                                     "3", "4"}},
-         {"Eru", {"4", "Ethernal flame", "", "22", "16", "18"}},
-         {"Doctor Watson", {"6", "Bowler hat", "Spy glass", "8", "3", "4"}},
-         {"Milos Zeman", {"50", "Shark skin", "Hoverboard", "1", "1", "1"}},
-         {"Aramis", {"15", "Mire helmet", "Diamond necklace", "8", "6", "5"}},
-         {"Linus Torvalds", {"10", "RHCE", "4th scarf", "13", "6", "10"}},
-         {"Bill Gates", {"15", "PDA", "RHCE", "9", "8", "9"}},
-         {"Mofftiss", {"14", "Fez", "Sonic screwdriver", "15", "12", "8"}},
-         {"Cleopatra", {"19", "Diamond necklace", "Fez", "7", "11", "9"}}
+        {{"Rassilon", {"100", "RingOfRassilon", "TheKeyToTime", "23", "8", "42"}},
+         {"PetShopOwner", {"4", "DeadParrot", "Albatros", "8", "2", "4"}},
+         {"KingArthur", {"8", "Excalibur", "", "9", "8", "14"}},
+         {"Bond,JamesBond", {"14", "PDA", "SpyGlass", "15", "9", "11"}},
+         {"RobinsonCrusoe", {"2", "SpyGlass", "DeadParrot", "2", "4", "6"}},
+         {"R2D2", {"6", "MireChip", "BowlerHat", "12", "4", "6"}},
+         {"Dalek", {"20", "TheKeyToTime", "Fez", "2", "5", "13"}},
+         {"QueenElizabeth", {"10", "DiamondNecklace", "FangNecklace", "14", "3", "4"}},
+         {"Eru", {"4", "EthernalFlame", "", "22", "16", "18"}},
+         {"DoctorWatson", {"6", "BowlerHat", "SpyGlass", "8", "3", "4"}},
+         {"MilosZeman", {"50", "SharkSkin", "Hoverboard", "1", "1", "1"}},
+         {"Aramis", {"15", "MireHelmet", "DiamondNecklace", "8", "6", "5"}},
+         {"LinusTorvalds", {"10", "RHCE", "4thScarf", "13", "6", "10"}},
+         {"BillGates", {"15", "PDA", "RHCE", "9", "8", "9"}},
+         {"Mofftiss", {"14", "Fez", "SonicScrewdriver", "15", "12", "8"}},
+         {"Cleopatra", {"19", "DiamondNecklace", "Fez", "7", "11", "9"}}
         }; // name, {hostility, item, weakness, charisma, speed, strength}

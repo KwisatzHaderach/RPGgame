@@ -3,7 +3,6 @@
 using namespace std;
 
 void GameEngine::buildPlace(Place *place, int difficulty, int length) {
-    srand(time(NULL));
     if (length >= GameVariables::gameDifficulty) {
         place->addWayForth(new FinishingPlace(
                 place, this->npcNameStack[rand()%npcNameStack.size()]));
@@ -27,7 +26,6 @@ void GameEngine::buildPlace(Place *place, int difficulty, int length) {
 
 void GameEngine::buildCity(City *city) {
     if (city->getStartingPlace()) return;
-    srand(time(NULL));
     int difficulty, length;
     BeginningPlace *start = new BeginningPlace();
     city->setStartingPlace(start);
@@ -96,13 +94,14 @@ bool GameEngine::walkThroughCity(Place *place) {
         place->printTextWithAnswers();
         int answers_size = place->getAnswersSize();
         cout << answers_size+1 << ") Look into your inventory." << endl;
-        cout << answers_size+2 << ") Look at your equipped items." << endl << endl;
+        cout << answers_size+2 << ") Look at your equipped items." << endl;
         int choice = 0;
         while (choice < 1 or choice > answers_size + 2) {
             cout << "What action would you like to perform? (1-" <<
-            answers_size + 1 << "): ";
+            answers_size + 2 << "): ";
             cin >> choice;
         }
+        cout << endl;
         if (choice == 1) break;
         else if (place->getBeing() and choice == 2) {
             if (this->hero->talkWithNPC(place->getBeing())) {
@@ -132,6 +131,7 @@ bool GameEngine::walkThroughCity(Place *place) {
 }
 
 GameEngine::GameEngine() {
+    srand(time(NULL));
     int difficulty = 0;
     while (difficulty < 1 or difficulty > 5) {
         cout << "What level of difficulty would you like to play on? (1-5): ";
@@ -145,7 +145,7 @@ GameEngine::GameEngine() {
     this->finale = Finale::getInstance();
     for(map<string,vector<string>>::iterator it = Item::namedItemStatsStack.begin();
             it != Item::namedItemStatsStack.end(); ++it) {
-        if (it->first == "Ring of Rassilon") continue;
+        if (it->first == "RingOfRassilon") continue;
         this->npcNameStack.push_back(it->first);
     }
 }
@@ -173,6 +173,7 @@ void GameEngine::gameIsOn() {
             else cout << num_cities+4 << "): ";
             cin >> choice;
         }
+        cout << endl;
         if (choice == 0) {
             cout << "Bye!" << endl;
             break;

@@ -178,7 +178,6 @@ bool Hero::fightWithNPC(NPC* being) {
         cout << "You have an item that NPC has weakness to." << endl;
         npc_life = 0;
     }
-    srand(time(NULL));
     while (npc_life > 0 and hero_life > 0) {
         int hero_action = this->getAction();
         if (hero_action == 5) {
@@ -325,7 +324,6 @@ bool Hero::talkWithNPC(NPC* being) {
     cout << "Interaction with NPC is about to begin." << endl;
     int hostility = being->getHostility();
     bool npc_solved = false, fight = true;
-    srand(time(NULL));
     Item* beings_item = being->getSpecialItem();
     int beings_item_value;
     if (beings_item)

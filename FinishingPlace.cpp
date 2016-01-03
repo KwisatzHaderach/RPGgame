@@ -3,7 +3,6 @@
 using namespace std;
 
 FinishingPlace::FinishingPlace(Place* wayBack, string being_name):Place() {
-    srand(time(NULL));
     this->wayBack = wayBack;
     this->wayForth = {};
     this->item = NULL;

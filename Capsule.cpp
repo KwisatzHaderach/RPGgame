@@ -32,7 +32,6 @@ void Capsule::setYear(int year) {
         return;
     }
     GameVariables::year = year;
-    srand(time(NULL));
     if (rand() % 10 == 0) {
         cout << "Your TARDIS has broken down, no time travel from now on" << endl;
         this->setWorking(false);

@@ -3,7 +3,6 @@
 using namespace std;
 
 BeginningPlace::BeginningPlace():Place() {
-    srand(time(NULL));
     int choice = rand() % 3;
     this->wayForth = {};
     this->wayBack = NULL;

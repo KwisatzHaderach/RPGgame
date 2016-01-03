@@ -3,7 +3,6 @@
 using namespace std;
 
 string Item::getRandomName() {
-    srand(time(NULL));
     int number = rand() % 5;
     switch (number)
     {
@@ -29,7 +28,6 @@ int Item::getSign(int number) {
 }
 
 Item::Item() {
-    srand(time(NULL));
     this->name = this->getRandomName();
     this->strengthMod = rand() % 3 + 1;
     this->charismaMod = 0;
@@ -50,7 +48,6 @@ Item::Item(string name) {
 }
 
 Item::Item(int year) {
-    srand(time(NULL));
     int closestYear = this->getClosestYear(year);
     this->name = this->yearItemNamesStack[closestYear][rand() %
             this->yearItemNamesStack[closestYear].size()];
@@ -97,35 +94,35 @@ void Item::printInfo() {
 }
 
 map<string, vector<string>> Item::namedItemStatsStack =
-        {{"Ring of Rassilon", {"20", "0", "5", "immortality", "stone", "hand"}},
-         {"The Key To Time", {"0", "10", "20", "repair capsule", "win the game",
+        {{"RingOfRassilon", {"20", "0", "5", "immortality", "stone", "hand"}},
+         {"TheKeyToTime", {"0", "10", "20", "repair capsule", "win the game",
                                      "neck"}},
-         {"Sonic screwdriver", {"2", "22", "11", "sonic", "", "hand"}},
-         {"Sonic glasses", {"2", "22", "11", "sonic", "", "head"}},
-         {"Mire helmet", {"12", "3", "0", "vision", "", "head"}},
-         {"Mire chip", {"8", "16", "4", "immortality", "boredom", "neck"}},
-         {"Dead parrot", {"5", "9", "6", "nailed", "dead", "hand"}},
+         {"SonicScrewdriver", {"2", "22", "11", "sonic", "", "hand"}},
+         {"SonicGlasses", {"2", "22", "11", "sonic", "", "head"}},
+         {"MireHelmet", {"12", "3", "0", "vision", "", "head"}},
+         {"MireChip", {"8", "16", "4", "immortality", "boredom", "neck"}},
+         {"DeadParrot", {"5", "9", "6", "nailed", "dead", "hand"}},
          {"Albatros", {"6", "7", "3", "Albatros!", "", "head"}},
          {"RHCE", {"1", "13", "2", "Certified!", "", "body"}},
-         {"4th scarf", {"5", "9", "4", "7 meters", "Time Lords be tripping",
+         {"4thScarf", {"5", "9", "4", "7 meters", "Time Lords be tripping",
                                "body"}},
          {"Fez", {"1", "7", "2", "walk past a fez", "never", "head"}},
          {"Hoverboard", {"2", "2", "12", "flying", "", "body"}},
-         {"Bowler hat", {"0", "6", "1", "protection", "", "head"}},
-         {"Spy glass", {"3", "4", "3", "vision", "", "hand"}},
+         {"BowlerHat", {"0", "6", "1", "protection", "", "head"}},
+         {"SpyGlass", {"3", "4", "3", "vision", "", "hand"}},
          {"Excalibur", {"15", "5", "5", "rule england", "", "hand"}},
-         {"Fang necklace", {"4", "7", "2", "magic", "", "neck"}},
+         {"FangNecklace", {"4", "7", "2", "magic", "", "neck"}},
          {"PDA", {"2", "8", "1", "mans best friend", "", "hand"}},
-         {"Ethernal flame", {"6", "12", "2", "fire", "burn with me", "head"}},
-         {"Shark skin", {"7", "6", "1", "fireproof", "", "body"}},
-         {"Diamond necklace", {"4", "9", "4", "shiny", "metal ass", "neck"}}
+         {"EthernalFlame", {"6", "12", "2", "fire", "burn with me", "head"}},
+         {"SharkSkin", {"7", "6", "1", "fireproof", "", "body"}},
+         {"DiamondNecklace", {"4", "9", "4", "shiny", "metal ass", "neck"}}
         }; // name, {strength, charisma, speed, special, special hidden, type}
 
 vector<vector<string>> Item::yearItemNamesStack =
-        {{"Stone knife", "Big wood", "Lizard", "Flint stone", "Mammoth bone"},
-         {"Scepter", "Rusty sword", "Small knife", "Flask", "Ring",
-                 "Leather bracelet"},
-         {"Digital watch", "Key", "Digital bracelet", "Gun", "Tamagochi",
-                 "Compass", "Pen", "Leather suitcase", "Torch", "Bottle of Gin"},
-         {"Master control", "Laser gun", "Communicator", "Personal computer",
-                 "Holographic ring", "Alien device", "Head in a jar"}};
+        {{"StoneKnife", "BigWood", "Lizard", "FlintStone", "MammothBone"},
+         {"Scepter", "RustySword", "SmallKnife", "Flask", "Ring",
+                 "LeatherBracelet"},
+         {"DigitalWatch", "Key", "DigitalBracelet", "Gun", "Tamagochi",
+                 "Compass", "Pen", "LeatherSuitcase", "Torch", "BottleOfGin"},
+         {"MasterControl", "LaserGun", "Communicator", "PersonalComputer",
+                 "HolographicRing", "AlienDevice", "HeadInAJar"}};
