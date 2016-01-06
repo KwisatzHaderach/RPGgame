@@ -76,7 +76,7 @@ void Place::setText() {
     int index = this->getClosestYear(GameVariables::year);
     int choice = rand() % this->choose_text[index].size();
     this->text = this->choose_text[index][choice];
-    for (int i = 0; i < this->wayForth.size(); ++i)
+    for (unsigned int i = 0; i < this->wayForth.size(); ++i)
         this->answers.push_back(this->choose_answers[index][i]);
 }
 

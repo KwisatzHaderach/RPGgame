@@ -12,7 +12,7 @@ void GameEngine::buildPlace(Place *place, int difficulty, int length) {
     int max = rand() % 3 + 1;
     difficulty += max - 1;
     length += 1;
-    for (unsigned int i = 0; i < max; ++i)
+    for (int i = 0; i < max; ++i)
         if (rand() % 4 == 0 and difficulty > 1) {
             place->addWayForth(new DeadEnd(place));
             difficulty -= 1;
@@ -171,7 +171,7 @@ GameEngine::GameEngine() {
     }
     GameVariables::gameDifficulty = difficulty*5;
     this->hero = new Hero();
-    for (unsigned int i = 0; i < difficulty*2; ++i)
+    for (int i = 0; i < difficulty*2; ++i)
         this->cities.push_back(new City(this->cityNameStack[i]));
     this->tardis = Capsule::getInstance();
     this->finale = Finale::getInstance();
@@ -190,7 +190,7 @@ void GameEngine::gameIsOn() {
         cout << endl << "And the year is: " << tardis->getYear() << endl;
         cout << "Your options are:" << endl;
         cout << "0) Quit this game." << endl;
-        for (unsigned int i = 0; i < num_cities; ++i)
+        for (int i = 0; i < num_cities; ++i)
             cout << i+1 << ") Visit city " << this->cities[i]->getName() << endl;
         cout << num_cities+1 << ") Go to your TARDIS and change year." << endl;
         cout << num_cities+2 << ") Look into your inventory." << endl;
