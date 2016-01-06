@@ -4,12 +4,12 @@ CFLAGS=-std=c++11
 FILES=Capsule.cpp City.cpp Finale.cpp GameEngine.cpp Hero.cpp\
 	Inventory.cpp Item.cpp main.cpp NPC.cpp Person.cpp Place.cpp\
 	BeginningPlace.cpp DeadEnd.cpp FinishingPlace.cpp variables.cpp
-TOPACK=Makefile description *.cpp *.h CMakeLists.txt ZOO-game.vpp ZOO-game.pdf
+TOPACK=Makefile *.cpp *.h CMakeLists.txt ZOO-game.vpp ZOO-game.pdf documentation.doc
 
 all: ZOO-game
 
 ZOO-game: $(FILES)
-	$(CC) $(CFLAGS) -o $@ -lm $(FILES)
+	$(CC) $(CFLAGS) -o $@ $(FILES)
 
 run:
 	./ZOO-game
