@@ -6,6 +6,7 @@
 #include <map>
 #include "Person.h"
 #include "Item.h"
+#include "variables.h"
 
 class NPC : public Person {
 private:

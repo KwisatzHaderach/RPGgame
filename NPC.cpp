@@ -17,10 +17,10 @@ string NPC::getRandomName() {
 
 NPC::NPC() {
     this->setName(this->getRandomName());
-    this->hostility = rand() % 15 + 5;
-    this->setCharisma(rand() % 5);
-    this->setSpeed(rand() % 10 + 5);
-    this->setStrength(rand() % 20 + 5);
+    this->hostility = rand() % GameVariables::gameDifficulty + 5;
+    this->setCharisma(rand() % GameVariables::gameDifficulty);
+    this->setSpeed(rand() % GameVariables::gameDifficulty + 2);
+    this->setStrength(rand() % GameVariables::gameDifficulty + 5);
     this->specialItem = NULL;
     this->weakness = new Item();
 }

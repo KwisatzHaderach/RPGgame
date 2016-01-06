@@ -112,7 +112,10 @@ bool GameEngine::walkThroughCity(Place *place) {
             if (this->hero->fightWithNPC(place->getBeing())) {
                 place->removeBeing();
                 if (place->getType() == "finish") return true;
-            } else if (place->getType() == "finish") return false;
+            } else if (place->getType() == "finish") {
+                cout << "This was the finishing place, but you failed the fight." << endl;
+                return false;
+            }
         }
         place->printTextWithAnswers();
         int answers_size = place->getAnswersSize();
