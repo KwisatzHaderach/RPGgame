@@ -3,10 +3,10 @@
 using namespace std;
 
 void GameEngine::buildPlace(Place *place, int difficulty, int length) {
-    place->setText();
     if (length >= GameVariables::gameDifficulty) {
         place->addWayForth(new FinishingPlace(
                 place, this->npcNameStack[rand()%npcNameStack.size()]));
+        place->setText();
         return;
     }
     int max = rand() % 3 + 1;
@@ -22,6 +22,7 @@ void GameEngine::buildPlace(Place *place, int difficulty, int length) {
             place->addWayForth(new_place);
             this->buildPlace(new_place, difficulty, length);
         }
+    place->setText();
 }
 
 void GameEngine::buildCity(City *city) {
