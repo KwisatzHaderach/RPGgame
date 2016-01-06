@@ -51,8 +51,8 @@ Item::Item(int year) {
     int closestYear = this->getClosestYear(year);
     this->name = this->yearItemNamesStack[closestYear][rand() %
             this->yearItemNamesStack[closestYear].size()];
-    this->strengthMod = rand() % 3 - (year % 5 * this->getSign(year));
-    this->charismaMod = rand() % 3 + (year % 5 * this->getSign(year));
+    this->strengthMod = rand() % 3 + (year % 5 * this->getSign(year));
+    this->charismaMod = rand() % 3 - (year % 5 * this->getSign(year));
     this->speedMod = year % 5;
     this->special = "";
     this->specialHidden = to_string(year);

@@ -62,6 +62,7 @@ Hero::Hero() {
         }
         if (answer == 'y') break;
     }
+    cout << endl;
     this->setStrength(strength);
     this->setCharisma(charisma);
     this->setSpeed(speed);
@@ -180,7 +181,7 @@ void Hero::printEquipped() {
 int Hero::getAction() {
     int answer = 0;
     cout << "Do you want to:" << endl;
-    if (GameVariables::gameDifficulty/10 < 3) {
+    if (GameVariables::gameDifficulty/5 < 3) {
         cout << "1) Attack" << endl;
         cout << "2) Defend" << endl;
         cout << "3) Flee from fight" << endl;
@@ -217,7 +218,7 @@ bool Hero::fightWithNPC(NPC* being) {
         cout << "You have an item that NPC has weakness to." << endl;
         npc_life = 0;
     }
-    bool easy = (GameVariables::gameDifficulty/10 < 3) ? true : false;
+    bool easy = (GameVariables::gameDifficulty/5 < 3) ? true : false;
     while (npc_life > 0 and hero_life > 0) {
         int hero_action = this->getAction();
         if (hero_action == 5 or (easy and hero_action == 3)) {
@@ -230,8 +231,8 @@ bool Hero::fightWithNPC(NPC* being) {
         if (easy) {
             if (this->getSpeed() > being->getSpeed()) {
                 if (hero_action == 1 and npc_action == 2) {
-                    npc_life -= (int) round(this->getStrength() *
-                                            (this->getSpeed() /
+                    npc_life -= (int) round((double)this->getStrength() *
+                                            ((double)this->getSpeed() /
                                              (this->getSpeed() +
                                               being->getSpeed())));
                     cout << "NPC didn't cover fast enough" << endl;
@@ -240,14 +241,19 @@ bool Hero::fightWithNPC(NPC* being) {
                     npc_life -= this->getStrength();
                     cout << "NPC didn't cover" << endl;
                 }
-                else if (npc_action == 1)
-                    cout << "NPC didn't attack fast enough" << endl;
+                else if (npc_action == 1) {
+                    hero_life -= (int) round((double)being->getStrength() *
+                                            ((double)being->getSpeed() /
+                                             (being->getSpeed() +
+                                              this->getSpeed())));
+                    cout << "Hero didn't cover fast enough" << endl;
+                }
                 else cout << "Both combatants are hiding" << endl;
             }
             else if (this->getSpeed() < being->getSpeed()) {
                 if (npc_action == 1 and hero_action == 2) {
-                    hero_action -= (int) round(being->getStrength() *
-                                            (being->getSpeed() /
+                    hero_life -= (int) round((double)being->getStrength() *
+                                            ((double)being->getSpeed() /
                                              (being->getSpeed() +
                                               this->getSpeed())));
                     cout << "Hero didn't cover fast enough" << endl;
@@ -256,8 +262,13 @@ bool Hero::fightWithNPC(NPC* being) {
                     hero_life -= being->getStrength();
                     cout << "Hero didn't cover" << endl;
                 }
-                else if (hero_action == 1)
-                    cout << "Hero didn't attack fast enough" << endl;
+                else if (hero_action == 1) {
+                    npc_life -= (int) round((double)this->getStrength() *
+                                            ((double)this->getSpeed() /
+                                             (this->getSpeed() +
+                                              being->getSpeed())));
+                    cout << "NPC didn't cover fast enough" << endl;
+                }
                 else cout << "Both combatants are hiding" << endl;
             }
             else {
@@ -274,8 +285,8 @@ bool Hero::fightWithNPC(NPC* being) {
             switch (hero_action) {
                 case 1:
                     if (npc_action == 3) {
-                        npc_life -= (int) round(this->getStrength() *
-                                                (this->getSpeed() /
+                        npc_life -= (int) round((double)this->getStrength() *
+                                                ((double)this->getSpeed() /
                                                  (this->getSpeed() +
                                                   being->getSpeed())));
                         cout << "NPC didn't cover fast enough" << endl;
@@ -291,8 +302,8 @@ bool Hero::fightWithNPC(NPC* being) {
                         cout << "NPC didn't cover the right place" << endl;
                     }
                     else {
-                        npc_life -= (int) round(this->getStrength() *
-                                                (this->getSpeed() /
+                        npc_life -= (int) round((double)this->getStrength() *
+                                                ((double)this->getSpeed() /
                                                  (this->getSpeed() +
                                                   being->getSpeed())));
                         cout << "NPC didn't cover fast enough" << endl;
@@ -321,8 +332,8 @@ bool Hero::fightWithNPC(NPC* being) {
             switch (npc_action) {
                 case 1:
                     if (hero_action == 3) {
-                        hero_life -= (int) round(being->getStrength() *
-                                                 (being->getSpeed() /
+                        hero_life -= (int) round((double)being->getStrength() *
+                                                 ((double)being->getSpeed() /
                                                   (being->getSpeed() +
                                                    this->getSpeed())));
                         cout << "Hero didn't cover fast enough" << endl;
@@ -338,8 +349,8 @@ bool Hero::fightWithNPC(NPC* being) {
                         cout << "Hero didn't cover the right place" << endl;
                     }
                     else {
-                        hero_life -= (int) round(being->getStrength() *
-                                                 (being->getSpeed() /
+                        hero_life -= (int) round((double)being->getStrength() *
+                                                 ((double)being->getSpeed() /
                                                   (being->getSpeed() +
                                                    this->getSpeed())));
                         cout << "Hero didn't cover fast enough" << endl;
@@ -385,6 +396,7 @@ bool Hero::fightWithNPC(NPC* being) {
         cout << "Hero: "<< hero_life << endl;
         cout << "NPC: " << npc_life << endl;
     } // while loop
+    cout << endl;
     if (hero_life > 0 and npc_life <= 0) {
         int random_money = rand() % 50 + 10;
         cout << "NPC dropped " << random_money << " money." << endl;

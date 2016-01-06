@@ -3,6 +3,7 @@
 using namespace std;
 
 void GameEngine::buildPlace(Place *place, int difficulty, int length) {
+    place->setText();
     if (length >= GameVariables::gameDifficulty) {
         place->addWayForth(new FinishingPlace(
                 place, this->npcNameStack[rand()%npcNameStack.size()]));
@@ -21,7 +22,6 @@ void GameEngine::buildPlace(Place *place, int difficulty, int length) {
             place->addWayForth(new_place);
             this->buildPlace(new_place, difficulty, length);
         }
-    place->setText();
 }
 
 void GameEngine::buildCity(City *city) {
@@ -165,15 +165,15 @@ GameEngine::GameEngine() {
             cin.ignore(numeric_limits<streamsize>::max(),'\n');
         }
     }
-    GameVariables::gameDifficulty = difficulty*10;
+    GameVariables::gameDifficulty = difficulty*5;
     this->hero = new Hero();
     for (unsigned int i = 0; i < difficulty*2; ++i)
         this->cities.push_back(new City(this->cityNameStack[i]));
     this->tardis = Capsule::getInstance();
     this->finale = Finale::getInstance();
-    for(map<string,vector<string>>::iterator it = Item::namedItemStatsStack.begin();
-            it != Item::namedItemStatsStack.end(); ++it) {
-        if (it->first == "RingOfRassilon") continue;
+    for(map<string,vector<string>>::iterator it = NPC::npcStatsStack.begin();
+            it != NPC::npcStatsStack.end(); ++it) {
+        if (it->first == "Rassilon") continue;
         this->npcNameStack.push_back(it->first);
     }
 }
@@ -183,7 +183,8 @@ void GameEngine::gameIsOn() {
     int num_cities = (int)this->cities.size();
     while (true) {
         cout << "You have " << cities_unfinished << " cities remaining to go through.";
-        cout << endl << "Your options are:" << endl;
+        cout << endl << "And the year is: " << tardis->getYear() << endl;
+        cout << "Your options are:" << endl;
         cout << "0) Quit this game." << endl;
         for (unsigned int i = 0; i < num_cities; ++i)
             cout << i+1 << ") Visit city " << this->cities[i]->getName() << endl;

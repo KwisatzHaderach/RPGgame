@@ -16,7 +16,7 @@
 
 class Hero : public Person {
 private:
-    int max_start_power = 10;
+    int max_start_power = 15;
     int money;
     std::vector<Item*> equipped; //head, neck, body, 2*hand
     int getAction();
