@@ -75,6 +75,7 @@ void GameEngine::workWithInventory() {
         string item_name;
         cout << "Write the name of item you would like to remove: ";
         cin >> item_name;
+        this->hero->unsetEquipped(item_name);
         this->hero->inventory->removeItem(item_name);
     }
 }

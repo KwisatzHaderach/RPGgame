@@ -21,6 +21,8 @@ NPC::NPC() {
     this->setCharisma(rand() % 5);
     this->setSpeed(rand() % 10 + 10);
     this->setStrength(rand() % 20 + 10);
+    this->specialItem = NULL;
+    this->weakness = new Item();
 }
 
 NPC::NPC(string name) {

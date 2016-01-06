@@ -11,6 +11,7 @@
 #include "Inventory.h"
 #include "Item.h"
 #include "NPC.h"
+#include "variables.h"
 
 class Hero : public Person {
 private:

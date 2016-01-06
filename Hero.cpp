@@ -156,16 +156,27 @@ void Hero::printEquipped() {
 }
 
 int Hero::getAction() {
-    cout << "Do you want to:" << endl;
-    cout << "1) Attack upper body" << endl;
-    cout << "2) Attack lower body" << endl;
-    cout << "3) Defend upper body" << endl;
-    cout << "4) Defend lower body" << endl;
-    cout << "5) Flee from fight" << endl;
     int answer = 0;
-    while (answer < 1 or answer > 5) {
-        cout << "Pick one option (1-5): ";
-        cin >> answer;
+    cout << "Do you want to:" << endl;
+    if (GameVariables::gameDifficulty/10 < 3) {
+        cout << "1) Attack" << endl;
+        cout << "2) Defend" << endl;
+        cout << "3) Flee from fight" << endl;
+        while (answer < 1 or answer > 3) {
+            cout << "Pick one option (1-3): ";
+            cin >> answer;
+        }
+    }
+    else {
+        cout << "1) Attack upper body" << endl;
+        cout << "2) Attack lower body" << endl;
+        cout << "3) Defend upper body" << endl;
+        cout << "4) Defend lower body" << endl;
+        cout << "5) Flee from fight" << endl;
+        while (answer < 1 or answer > 5) {
+            cout << "Pick one option (1-5): ";
+            cin >> answer;
+        }
     }
     return answer;
 }
@@ -173,21 +184,65 @@ int Hero::getAction() {
 bool Hero::fightWithNPC(NPC* being) {
     cout << "You are entering the duel." << endl;
     int npc_life = 100, hero_life = 100;
-    if (being->getWeakness() and
+    if (being->getWeakness() != NULL and
             this->inventory->isItemInInventory(being->getWeakness()->getName())) {
         cout << "You have an item that NPC has weakness to." << endl;
         npc_life = 0;
     }
+    bool easy = (GameVariables::gameDifficulty/10 < 3) ? true : false;
     while (npc_life > 0 and hero_life > 0) {
         int hero_action = this->getAction();
-        if (hero_action == 5) {
+        if (hero_action == 5 or (easy and hero_action == 3)) {
             cout << "You are fleeing a fight and might loose some money." << endl;
             if (this->getSpeed() <= being->getSpeed())
                 this->money -= being->getStrength();
             break;
         }
-        int npc_action = rand() % 4 + 1;
-        if (this->getSpeed() > being->getSpeed())
+        int npc_action = (easy) ? rand() % 2 + 1 : rand() % 4 + 1;
+        if (easy) {
+            if (this->getSpeed() > being->getSpeed()) {
+                if (hero_action == 1 and npc_action == 2) {
+                    npc_life -= (int) round(this->getStrength() *
+                                            (this->getSpeed() /
+                                             (this->getSpeed() +
+                                              being->getSpeed())));
+                    cout << "NPC didn't cover fast enough" << endl;
+                }
+                else if (hero_action == 1 and npc_action == 1) {
+                    npc_life -= this->getStrength();
+                    cout << "NPC didn't cover" << endl;
+                }
+                else if (npc_action == 1)
+                    cout << "NPC didn't attack fast enough" << endl;
+                else cout << "Both combatants are hiding" << endl;
+            }
+            else if (this->getSpeed() < being->getSpeed()) {
+                if (npc_action == 1 and hero_action == 2) {
+                    hero_action -= (int) round(being->getStrength() *
+                                            (being->getSpeed() /
+                                             (being->getSpeed() +
+                                              this->getSpeed())));
+                    cout << "Hero didn't cover fast enough" << endl;
+                }
+                else if (npc_action == 1 and hero_action == 1) {
+                    hero_life -= being->getStrength();
+                    cout << "Hero didn't cover" << endl;
+                }
+                else if (hero_action == 1)
+                    cout << "Hero didn't attack fast enough" << endl;
+                else cout << "Both combatants are hiding" << endl;
+            }
+            else {
+                if (hero_action == npc_action and hero_action == 1)
+                    cout << "Weapons clashed in the air" << endl;
+                else if (hero_action == npc_action and hero_action == 2)
+                    cout << "Both combatants are hiding" << endl;
+                else if (hero_action == 1)
+                    cout << "Hero didn't attack fast enough" << endl;
+                else cout << "NPC didn't attack fast enough" << endl;
+            }
+        }
+        else if (this->getSpeed() > being->getSpeed())
             switch (hero_action) {
                 case 1:
                     if (npc_action == 3) {
@@ -326,17 +381,17 @@ bool Hero::talkWithNPC(NPC* being) {
     bool npc_solved = false, fight = true;
     Item* beings_item = being->getSpecialItem();
     int beings_item_value;
-    if (beings_item)
+    if (beings_item != NULL)
         beings_item_value = beings_item->getStrengthMod() +
                 beings_item->getCharismaMod() + beings_item->getSpeedMod();
     else beings_item_value = 0;
     while (hostility < this->getCharisma() * 2) {
         if (hostility < 0) {
-            cout << "NPC is now your friend and you can continue." << endl;
+            cout << "NPC is now your friend and you can continue." << endl << endl;
             npc_solved = true;
             break;
         }
-        cout << endl << this->questions[rand() % this->questions.size()];
+        cout << endl << this->questions[rand() % this->questions.size()] << endl;
         pair<string, int> option1, option2, option3;
         option1 = this->answers[rand() % this->answers.size()];
         option2 = this->answers[rand() % this->answers.size()];
@@ -346,7 +401,7 @@ bool Hero::talkWithNPC(NPC* being) {
         cout << "3) " << option3.first << endl;
         cout << "4) Leave this conversation." << endl;
         bool trade = false;
-        if (hostility < this->getCharisma() and beings_item) {
+        if (hostility < this->getCharisma() and beings_item != NULL) {
             cout << "5) Buy item that this creature holds." << endl;
             cout << "Item: ";
             beings_item->printInfo();
