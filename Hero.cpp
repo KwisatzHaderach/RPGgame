@@ -7,7 +7,11 @@ Hero::Hero() {
     int strength, charisma, speed;
 
     cout << "Choose a name for your hero: ";
-    cin >> name;
+    while (!(cin >> name)) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "Ivalid name, try again: ";
+    }
     this->setName(name);
 
     while(true) {
@@ -20,19 +24,28 @@ Hero::Hero() {
         while (strength < 0 or strength > remaining_power) {
             cout << "Starting strength should be (max: " << remaining_power;
             cout << "): ";
-            cin >> strength;
+            if (!(cin >> strength)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            }
         }
         remaining_power -= strength;
         while (charisma < 0 or charisma > remaining_power) {
             cout << "Starting charisma should be (max: " << remaining_power;
             cout << "): ";
-            cin >> charisma;
+            if (!(cin >> charisma)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            }
         }
         remaining_power -= charisma;
         while (speed < 0 or speed > remaining_power) {
             cout << "Starting speed should be (max: " << remaining_power;
             cout << "): ";
-            cin >> speed;
+            if (!(cin >> speed)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            }
         }
         remaining_power -= speed;
 
@@ -42,7 +55,10 @@ Hero::Hero() {
         char answer = 'a';
         while (answer != 'y' and answer != 'n') {
             cout << "Would like to keep this setting? (y/n): ";
-            cin >> answer;
+            if (!(cin >> answer)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            }
         }
         if (answer == 'y') break;
     }
@@ -108,7 +124,10 @@ void Hero::setEquipped(Item* item) {
                         while (answer != '1' and answer != '2' and
                                answer != 'n') {
                             cout << "Your choice is (1/2/n): ";
-                            cin >> answer;
+                            if (!(cin >> answer)) {
+                                cin.clear();
+                                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                            }
                         }
                         if (answer == '1')
                             this->equipped[i] = item;
@@ -127,7 +146,10 @@ void Hero::setEquipped(Item* item) {
             char answer = 'a';
             while (answer != 'y' and answer != 'n') {
                 cout << "Your choice is (y/n): ";
-                cin >> answer;
+                if (!(cin >> answer)) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                }
             }
             if (answer == 'y')
                 this->equipped[i] = item;
@@ -164,7 +186,10 @@ int Hero::getAction() {
         cout << "3) Flee from fight" << endl;
         while (answer < 1 or answer > 3) {
             cout << "Pick one option (1-3): ";
-            cin >> answer;
+            if (!(cin >> answer)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            }
         }
     }
     else {
@@ -175,7 +200,10 @@ int Hero::getAction() {
         cout << "5) Flee from fight" << endl;
         while (answer < 1 or answer > 5) {
             cout << "Pick one option (1-5): ";
-            cin >> answer;
+            if (!(cin >> answer)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            }
         }
     }
     return answer;
@@ -413,7 +441,10 @@ bool Hero::talkWithNPC(NPC* being) {
             cout << "Choose answer (1-";
             if (trade) cout << "5): ";
             else cout << "4): ";
-            cin >> answer;
+            if (!(cin >> answer)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            }
         }
         switch (answer)
         {

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
 #include "Hero.h"
 #include "City.h"
 #include "Capsule.h"

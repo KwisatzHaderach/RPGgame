@@ -43,12 +43,19 @@ void GameEngine::workWithEquip() {
     char answer = 'a';
     while (answer != 'y' and answer != 'n') {
         cout << "Would like to unequip any item? (y/n): ";
-        cin >> answer;
+        if (!(cin >> answer)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        }
     }
     if (answer == 'y') {
         string item_name;
         cout << "Write the name of item you would like to uneqip: ";
-        cin >> item_name;
+        while (!(cin >> item_name)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input, try again: ";
+        }
         this->hero->unsetEquipped(item_name);
     }
 }
@@ -58,23 +65,37 @@ void GameEngine::workWithInventory() {
     char answer = 'a';
     while (answer != 'y' and answer != 'n') {
         cout << "Would you like to equipp any item? (y/n): ";
-        cin >> answer;
+        if (!(cin >> answer)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        }
     }
     if (answer == 'y') {
         string item_name;
         cout << "Write the name of item you would like to eqipp: ";
-        cin >> item_name;
+        while (!(cin >> item_name)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input, try again: ";
+        }
         this->hero->setEquipped(this->hero->inventory->getItem(item_name));
     }
     answer = 'a';
     while (answer != 'y' and answer != 'n') {
         cout << "Would you like to remove any item? (y/n): ";
-        cin >> answer;
+        if (!(cin >> answer)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        }
     }
     if (answer == 'y') {
         string item_name;
         cout << "Write the name of item you would like to remove: ";
-        cin >> item_name;
+        while (!(cin >> item_name)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cout << "Invalid input, try again: ";
+        }
         this->hero->unsetEquipped(item_name);
         this->hero->inventory->removeItem(item_name);
     }
@@ -100,7 +121,10 @@ bool GameEngine::walkThroughCity(Place *place) {
         while (choice < 1 or choice > answers_size + 2) {
             cout << "What action would you like to perform? (1-" <<
             answers_size + 2 << "): ";
-            cin >> choice;
+            if (!(cin >> choice)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            }
         }
         cout << endl;
         if (choice == 1) break;
@@ -136,7 +160,10 @@ GameEngine::GameEngine() {
     int difficulty = 0;
     while (difficulty < 1 or difficulty > 5) {
         cout << "What level of difficulty would you like to play on? (1-5): ";
-        cin >> difficulty;
+        if (!(cin >> difficulty)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        }
     }
     GameVariables::gameDifficulty = difficulty*10;
     this->hero = new Hero();
@@ -172,7 +199,10 @@ void GameEngine::gameIsOn() {
             if (cities_unfinished > 0)
                 cout << num_cities+3 << "): ";
             else cout << num_cities+4 << "): ";
-            cin >> choice;
+            if (!(cin >> choice)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            };
         }
         cout << endl;
         if (choice == 0) {
@@ -190,7 +220,11 @@ void GameEngine::gameIsOn() {
         else if (choice == num_cities+1) {
             int new_year;
             cout << "What year would you like to travel to? ";
-            cin >> new_year;
+            while (!(cin >> new_year)) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(),'\n');
+                cout << "Invalid year, try again: ";
+            }
             this->tardis->setYear(new_year);
         }
         else if (choice == num_cities+2) {

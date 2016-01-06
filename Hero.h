@@ -12,6 +12,7 @@
 #include "Item.h"
 #include "NPC.h"
 #include "variables.h"
+#include <limits>
 
 class Hero : public Person {
 private:
